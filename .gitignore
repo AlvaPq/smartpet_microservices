@@ -1,0 +1,18 @@
+# Maven
+target/
+
+# Eclipse / STS
+.metadata/
+.settings/
+.project
+.classpath
+
+# IntelliJ
+.idea/
+*.iml
+
+# Logs
+*.log
+
+# Windows
+Thumbs.db
