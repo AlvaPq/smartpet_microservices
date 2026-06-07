@@ -42,6 +42,7 @@ public class AuthController {
                         "Auth Service funcionando correctamente"));
     }
     
+    
     @PostMapping("/login")
     public ResponseEntity<AuthResponse>
             login(
@@ -52,6 +53,14 @@ public class AuthController {
                 authService.login(request));
     }
     
+    @GetMapping("/usuarios/{id}")
+    public ResponseEntity<UsuarioResponse>
+            buscarPorId(
+                    @PathVariable Integer id) {
+
+        return ResponseEntity.ok(
+                authService.buscarPorId(id));
+    }
     @GetMapping("/test")
     public String test() {
 
@@ -59,4 +68,21 @@ public class AuthController {
 
     }
 
+    
+    @GetMapping("/admin/test")
+    public String adminTest() {
+
+        return "ADMIN OK";
+    }
+    @GetMapping("/veterinario/test")
+    public String veterinarioTest() {
+
+        return "VETERINARIO OK";
+    }
+    @GetMapping("/cliente/test")
+    public String clienteTest() {
+
+        return "CLIENTE OK";
+    }
+    
 }

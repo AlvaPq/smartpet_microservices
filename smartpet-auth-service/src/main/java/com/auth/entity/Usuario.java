@@ -28,12 +28,14 @@ public class Usuario {
     private String nombre;
 
     private String apellido;
+    private String dni;
 
     @Column(unique = true)
     private String correo;
 
     private String password;
 
+    private String telefono;
     private Boolean estado;
 
     @ManyToOne

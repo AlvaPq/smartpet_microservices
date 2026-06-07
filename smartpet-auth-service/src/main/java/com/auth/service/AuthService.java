@@ -12,5 +12,9 @@ public interface AuthService {
     
     AuthResponse login(
             LoginRequest request);
+    
+    
+    UsuarioResponse buscarPorId(
+            Integer id);
 
 }

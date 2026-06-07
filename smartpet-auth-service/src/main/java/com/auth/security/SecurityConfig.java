@@ -38,14 +38,39 @@ public class SecurityConfig {
 
             .authorizeHttpRequests(auth -> auth
 
-                    .requestMatchers(
-                            "/auth/register",
-                            "/auth/login")
-                    .permitAll()
+            	    .requestMatchers(
+            	            "/auth/register",
+            	            "/auth/login")
+            	    .permitAll()
+            	    .requestMatchers(
+            	            "/auth/usuarios/**")
+            	    .permitAll()
 
-                    .anyRequest()
-                    .authenticated())
+            	    .requestMatchers(
+            	            "/auth/admin/**")
+            	    .hasRole("ADMIN")
 
+            	    .requestMatchers(
+            	            "/auth/veterinario/**")
+            	    .hasAnyRole(
+            	            "ADMIN",
+            	            "VETERINARIO")
+
+            	    .requestMatchers(
+            	            "/auth/recepcionista/**")
+            	    .hasAnyRole(
+            	            "ADMIN",
+            	            "RECEPCIONISTA")
+
+            	    .requestMatchers(
+            	            "/auth/cliente/**")
+            	    .hasAnyRole(
+            	            "ADMIN",
+            	            "CLIENTE")
+
+            	    .anyRequest()
+            	    .authenticated()
+            	)
             .addFilterBefore(
                     jwtFilter,
                     UsernamePasswordAuthenticationFilter.class);

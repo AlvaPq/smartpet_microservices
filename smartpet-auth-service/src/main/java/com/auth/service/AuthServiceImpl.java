@@ -48,6 +48,8 @@ public class AuthServiceImpl
                 .nombre(request.getNombre())
                 .apellido(request.getApellido())
                 .correo(request.getCorreo())
+                .dni(request.getDni())
+                .telefono(request.getTelefono())
                 .password(
                         passwordEncoder.encode(
                                 request.getPassword()))
@@ -63,6 +65,8 @@ public class AuthServiceImpl
                 .nombre(guardado.getNombre())
                 .apellido(guardado.getApellido())
                 .correo(guardado.getCorreo())
+                .dni(guardado.getDni())
+                .telefono(guardado.getTelefono())
                 .rol(guardado.getRol().getNombre())
                 .estado(guardado.getEstado())
                 .build();
@@ -101,6 +105,8 @@ public class AuthServiceImpl
                         .nombre(usuario.getNombre())
                         .apellido(usuario.getApellido())
                         .correo(usuario.getCorreo())
+                        .dni(usuario.getDni())
+                        .telefono(usuario.getTelefono())
                         .rol(usuario.getRol().getNombre())
                         .estado(usuario.getEstado())
                         .build();
@@ -110,4 +116,28 @@ public class AuthServiceImpl
                 .usuario(usuarioResponse)
                 .build();
     }
+    
+    
+    @Override
+    public UsuarioResponse buscarPorId(
+            Integer id) {
+
+        Usuario usuario =
+                usuarioRepository.findById(id)
+                        .orElseThrow(() ->
+                                new BusinessException(
+                                        "Usuario no encontrado"));
+
+        return UsuarioResponse.builder()
+                .id(usuario.getId())
+                .nombre(usuario.getNombre())
+                .apellido(usuario.getApellido())
+                .correo(usuario.getCorreo())
+                .dni(usuario.getDni())
+                .telefono(usuario.getTelefono())
+                .rol(usuario.getRol().getNombre())
+                .estado(usuario.getEstado())
+                .build();
+    }
+    
 }
