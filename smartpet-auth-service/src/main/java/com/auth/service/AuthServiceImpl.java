@@ -1,5 +1,7 @@
 package com.auth.service;
 
+import java.util.List;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -139,5 +141,34 @@ public class AuthServiceImpl
                 .estado(usuario.getEstado())
                 .build();
     }
+
+    @Override
+    public List<UsuarioResponse>
+            listarVeterinarios() {
+
+        return usuarioRepository
+                .findAll()
+                .stream()
+                .filter(usuario ->
+                        usuario.getRol()
+                                .getNombre()
+                                .equals("VETERINARIO"))
+                .map(this::convertirResponse)
+                .toList();
+    }
     
+    private UsuarioResponse convertirResponse(
+            Usuario usuario) {
+
+        return UsuarioResponse.builder()
+                .id(usuario.getId())
+                .nombre(usuario.getNombre())
+                .apellido(usuario.getApellido())
+                .correo(usuario.getCorreo())
+                .dni(usuario.getDni())
+                .telefono(usuario.getTelefono())
+                .rol(usuario.getRol().getNombre())
+                .estado(usuario.getEstado())
+                .build();
+    }
 }
