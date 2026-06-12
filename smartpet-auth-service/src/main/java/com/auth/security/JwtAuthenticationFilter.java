@@ -41,7 +41,7 @@ public class JwtAuthenticationFilter
 
         if (authHeader == null
                 || !authHeader.startsWith(
-                        "Bearer ")) {
+                        "Bearer")) {
 
             filterChain.doFilter(
                     request,
